@@ -2,5 +2,5 @@
 </script>
 
 <template>
-  <button class="btn">Button</button>
+  <h1 class="text-xl font-bold">Home</h1>
 </template>
