@@ -1,21 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import TodoForm, { type TodoFormData } from "@/components/TodoForm.vue"
 
-const titleInput = ref('')
-const descInput = ref('')
+function onSubmit(formData: TodoFormData) {
+  console.log(formData)
+}
 </script>
 
 <template>
   <h1 class="text-xl font-bold">Todo</h1>
-  <label class="input input-bordered flex items-center gap-2">
-    Title
-    <input type="text" class="grow" v-model="titleInput" />
-  </label>
-  <label class="input input-bordered flex items-center gap-2">
-    Description
-    <input type="text" class="grow" v-model="descInput" />
-  </label>
-  <button class="btn btn-primary">Add</button>
+  <TodoForm @submit="onSubmit" />
   <div class="overflow-x-auto">
     <table class="table">
       <!-- head -->
