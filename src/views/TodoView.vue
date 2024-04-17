@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import TodoForm, { type TodoFormData } from "@/components/TodoForm.vue"
+import { useTodorStore } from "@/stores/todo";
+
+const todos = useTodorStore()
 
 function onSubmit(formData: TodoFormData) {
-  console.log(formData)
+  todos.add({...formData, done: false});
 }
 </script>
 
@@ -26,20 +29,19 @@ function onSubmit(formData: TodoFormData) {
       </thead>
       <tbody>
         <!-- row 1 -->
-        <tr>
+        <tr v-for="todo in todos.todos" :key="todo.title">
           <th>
             <label>
               <input type="checkbox" class="checkbox" />
             </label>
           </th>
           <td>
-            Zemlak, Daniel and Leannon
+            {{ todo.title }}
             <br />
-            <span class="badge badge-ghost badge-sm">Task</span>
           </td>
-          <td>Purple</td>
+          <td>{{ todo.description }}</td>
           <th>
-            <button class="btn btn-ghost btn-xs">delete</button>
+            <button class="btn btn-ghost btn-xs" @click="todos.remove(todo)">delete</button>
           </th>
         </tr>
       </tbody>
@@ -48,9 +50,8 @@ function onSubmit(formData: TodoFormData) {
         <tr>
           <th></th>
           <th>Name</th>
-          <th>Job</th>
-          <th>Favorite Color</th>
-          <th></th>
+          <th>Description</th>
+          <th>Done</th>
         </tr>
       </tfoot>
     </table>

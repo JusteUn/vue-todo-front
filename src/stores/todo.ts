@@ -7,11 +7,15 @@ export interface Todo {
   done: boolean
 }
 
-export const useCounterStore = defineStore('counter', () => {
+export const useTodorStore = defineStore('todo', () => {
   const todos: Ref<Todo[]> = ref([])
 
   function add(item: Todo) {
     todos.value.push(item)
   }
-  return { todos, add }
+  function remove(item: Todo) {
+    const indexOfItem = todos.value.indexOf(item)
+    todos.value.splice(indexOfItem, 1)
+  }
+  return { todos, add, remove }
 })
